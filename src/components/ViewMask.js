@@ -1,10 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 
-import { View, Animated } from 'react-native';
+import { View, Animated, I18nManager } from 'react-native';
 import styles from './style';
 
 import type { valueXY } from '../types';
+
+const rtl = I18nManager.isRTL;
+const start = rtl ? 'right' : 'left';
+const end = rtl ? 'left' : 'right';
 
 type Props = {
   size: valueXY,
@@ -82,7 +86,7 @@ class ViewMask extends Component<Props, State> {
           style={[
             styles.overlayRectangle,
             {
-              right: leftOverlayRight,
+              [end]: leftOverlayRight,
               backgroundColor: this.props.backdropColor,
             }]}
         />
@@ -90,7 +94,7 @@ class ViewMask extends Component<Props, State> {
           style={[
             styles.overlayRectangle,
             {
-              left: rightOverlayLeft,
+              [start]: rightOverlayLeft,
               backgroundColor: this.props.backdropColor,
             }]}
         />
@@ -99,8 +103,8 @@ class ViewMask extends Component<Props, State> {
             styles.overlayRectangle,
             {
               top: bottomOverlayTopBoundary,
-              left: verticalOverlayLeftBoundary,
-              right: verticalOverlayRightBoundary,
+              [start]: verticalOverlayLeftBoundary,
+              [end]: verticalOverlayRightBoundary,
               backgroundColor: this.props.backdropColor,
             },
           ]}
@@ -110,8 +114,8 @@ class ViewMask extends Component<Props, State> {
             styles.overlayRectangle,
             {
               bottom: topOverlayBottomBoundary,
-              left: verticalOverlayLeftBoundary,
-              right: verticalOverlayRightBoundary,
+              [start]: verticalOverlayLeftBoundary,
+              [end]: verticalOverlayRightBoundary,
               backgroundColor: this.props.backdropColor,
             },
           ]}
